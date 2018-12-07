@@ -17,16 +17,6 @@ map<int, double> ResultUtil::initialResultMap(int columnSize)
     return resultMap;
 }
 
-void ResultUtil::printResultMap(map<int, double> resultMap)
-{
-    cout << "Result : " << endl;
-
-    for (map<int, double>::iterator it = resultMap.begin(); it != resultMap.end(); ++it)
-    {
-        cout << "x" << it->first << " = " << it->second << endl;
-    }
-}
-
 map<int, double> ResultUtil::calculateResult(map<int, double> resultMap, double** matrix, int rowSize, int columnSize)
 {
     int key = columnSize;
@@ -55,4 +45,14 @@ map<int, double> ResultUtil::calculateResult(map<int, double> resultMap, double*
     }
 
     return resultMap;
+}
+
+void ResultUtil::printResultMap(map<int, double> resultMap)
+{
+    cout << "Result : " << endl;
+
+    for (map<int, double>::iterator it = resultMap.begin(); it != resultMap.end(); ++it)
+    {
+        cout << "x" << it->first << " = " << it->second << endl;
+    }
 }

@@ -27,13 +27,6 @@ void MatchematicalMatrix::deleteMatrix(double** matrix, int rowSize)
 
 void MatchematicalMatrix::initializeMatrix(double** matrix, int rowSize, int columnSize)
 {
-	// for(int i = 0; i < rowSize; i++)
-	// {
-	// 	for(int j = 0; j < columnSize; j++)
-	// 	{
-	// 		matrix[i][j] = i+1;
-	// 	}
-	// }
 	matrix[0][0] = 3;
 	matrix[0][1] = -1;
 	matrix[0][2] = -1;

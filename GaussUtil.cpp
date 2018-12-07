@@ -24,7 +24,7 @@ void GaussUtil::countStandardGauss(double **matrix, int rowSize, int columnSize,
     }
 }
 
-void GaussUtil::countChooseInColumGauss(MatchematicalMatrix* matchematicalMatrix, double **matrix, int rowSize, int columnSize, int rowIndex, int columnIndex, int stepNumber)
+void GaussUtil::countChooseInColumGauss(CommonUtil* commonUtil, MatchematicalMatrix* matchematicalMatrix, double **matrix, int rowSize, int columnSize, int rowIndex, int columnIndex, int stepNumber)
 {
     double* singleColumn = new double[rowSize - rowIndex];
     for(int i = 0; i < rowSize; i ++)
@@ -32,7 +32,7 @@ void GaussUtil::countChooseInColumGauss(MatchematicalMatrix* matchematicalMatrix
         singleColumn[i] = matrix[i][columnIndex];
     }
     
-    int index = indexOfMaxValue(singleColumn, rowSize - rowIndex);
+    int index = commonUtil->indexOfMaxValue(singleColumn, rowSize - rowIndex);
 
     delete [] singleColumn;
 
@@ -55,22 +55,8 @@ void GaussUtil::countChooseInColumGauss(MatchematicalMatrix* matchematicalMatrix
 
     if(stepNumber < rowSize - 1) 
     {
-    countChooseInColumGauss(matchematicalMatrix, matrix, rowSize, columnSize, rowIndex + 1, columnIndex + 1, stepNumber + 1);
+    countChooseInColumGauss(commonUtil, matchematicalMatrix, matrix, rowSize, columnSize, rowIndex + 1, columnIndex + 1, stepNumber + 1);
     }
-}
-
-int GaussUtil::indexOfMaxValue(double* table, int tableSize)
-{   
-    int indexOfMaxValue = 0;
-    for(int i = 0; i < tableSize; i++)
-    {
-        if(table[i] > table[indexOfMaxValue])
-        {
-            indexOfMaxValue = i;
-        }
-    }
-
-    return indexOfMaxValue;
 }
 
 double* GaussUtil::countCoefficients(double **matrix, int rowIndex, int columnIndex, int rowSize)
@@ -102,14 +88,4 @@ void GaussUtil::modifyRow(double** matrix, double coefficient, int startRowIndex
     {
         matrix[startRowIndex][i] =  matrix[startRowIndex][i] - coefficient*matrix[stepNumber-1][i];
     }
-}
-
-
-void GaussUtil::printTable(double* table, int size)
-{
-    for(int i=0; i < size; i++)
-    {
-        cout << table[i] << " ";
-    }
-    cout << endl;
 }
