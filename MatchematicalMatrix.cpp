@@ -63,3 +63,18 @@ void MatchematicalMatrix::printMatrix(double** matrix, int rowSize, int columnSi
 		cout << endl;
 	}
 }
+
+void MatchematicalMatrix::exchangeRow(double** matrix, int firstRow, int secondRow)
+{
+	swap(matrix[firstRow], matrix[secondRow]);
+}
+
+void MatchematicalMatrix::exchangeColumn(int* orderTable, double** matrix, int firstColumn, int secondColumn, int rowSize)
+{
+	for(int i = 0; i < rowSize; i++)
+	{
+		swap(matrix[i][firstColumn], matrix[i][secondColumn]);
+	}
+
+	swap(orderTable[firstColumn], orderTable[secondColumn]);
+}

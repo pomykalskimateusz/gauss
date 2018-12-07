@@ -15,4 +15,8 @@ class MatchematicalMatrix
     void initializeMatrix(double** matrix, int rowSize, int columnSize);
 
     void printMatrix(double** matrix, int rowSize, int columnSize);
+
+    void exchangeRow(double** matrix, int firstRow, int secondRow);
+
+    void exchangeColumn(int* orderTable, double** matrix, int firstColumn, int secondColumn, int rowSize);
 };
