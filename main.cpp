@@ -50,8 +50,10 @@ int main()
         orderTable[i] = i;
     }
 
-    gaussUtil->countChooseInRowGauss(commonUtil, matchematicalMatrix, orderTable, matrix, rowSize, columnSize, rowIndex, columnIndex, stepNumber);
-    
+    //gaussUtil->countChooseInRowGauss(commonUtil, matchematicalMatrix, orderTable, matrix, rowSize, columnSize, rowIndex, columnIndex, stepNumber);
+    //gaussUtil->countChooseInColumGauss(commonUtil, matchematicalMatrix, matrix, rowSize, columnSize, rowIndex, columnIndex, stepNumber);
+    gaussUtil->countStandardGauss(matrix, rowSize, columnSize, rowIndex, columnIndex, stepNumber);
+
     orderAsc(matchematicalMatrix, orderTable, columnSize - 1, matrix, rowSize);
 
     matchematicalMatrix->printMatrix(matrix, rowSize, columnSize);
@@ -63,7 +65,7 @@ int main()
     resultUtil->printResultMap(resultMap);
 
     delete [] orderTable;
-    
+
     matchematicalMatrix->deleteMatrix(matrix, rowSize);
 
     return 0;

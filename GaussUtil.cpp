@@ -27,12 +27,13 @@ void GaussUtil::countStandardGauss(double **matrix, int rowSize, int columnSize,
 void GaussUtil::countChooseInColumGauss(CommonUtil* commonUtil, MatchematicalMatrix* matchematicalMatrix, double **matrix, int rowSize, int columnSize, int rowIndex, int columnIndex, int stepNumber)
 {
     double* singleColumn = new double[rowSize - rowIndex];
-    for(int i = 0; i < rowSize; i ++)
+
+    for(int i = 0; i < rowSize - rowIndex; i ++)
     {
-        singleColumn[i] = matrix[i][columnIndex];
+        singleColumn[i] = matrix[rowIndex + i][columnIndex];
     }
-    
-    int index = commonUtil->indexOfMaxValue(singleColumn, rowSize - rowIndex);
+
+    int index = commonUtil->indexOfMaxValue(singleColumn, rowSize - rowIndex) + stepNumber - 1;
 
     delete [] singleColumn;
 
@@ -88,12 +89,12 @@ void GaussUtil::countChooseInRowGauss(CommonUtil* commonUtil, MatchematicalMatri
         coeIndex++;
     }
 
+    delete[] coefficients;
+
     if(stepNumber < rowSize - 1) 
     {
         countChooseInRowGauss(commonUtil, matchematicalMatrix, orderTable, matrix, rowSize, columnSize, rowIndex + 1, columnIndex + 1, stepNumber + 1);
     }
-
-    delete[] coefficients;
 }
 
 double* GaussUtil::countCoefficients(double **matrix, int rowIndex, int columnIndex, int rowSize)
