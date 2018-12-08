@@ -11,5 +11,5 @@ class ResultUtil
     
     map<int, double> calculateResult(map<int, double> resultMap, double** matrix, int rowSize, int columnSize);
 
-    void printResultMap(map<int, double> resultMap);
+    void printResultMap(map<int, double> resultMap, int* orderTable, int tableSize);
 };

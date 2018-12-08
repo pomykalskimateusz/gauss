@@ -47,12 +47,12 @@ map<int, double> ResultUtil::calculateResult(map<int, double> resultMap, double*
     return resultMap;
 }
 
-void ResultUtil::printResultMap(map<int, double> resultMap)
+void ResultUtil::printResultMap(map<int, double> resultMap, int* orderTable, int tableSize)
 {
     cout << "Result : " << endl;
 
-    for (map<int, double>::iterator it = resultMap.begin(); it != resultMap.end(); ++it)
+    for(int i = 0; i < tableSize; i++)
     {
-        cout << "x" << it->first << " = " << it->second << endl;
+        cout << "x" << orderTable[i] + 1 << " = " << resultMap[i+1] << endl;
     }
 }

@@ -1,5 +1,6 @@
 #include <string>
 #include <iostream>
+#include <map>
 
 using namespace std;
 
@@ -19,4 +20,6 @@ class MatchematicalMatrix
     void exchangeRow(double** matrix, int firstRow, int secondRow);
 
     void exchangeColumn(int* orderTable, double** matrix, int firstColumn, int secondColumn, int rowSize);
+
+    pair<int, int> indexOfMaxValueIn(double** matrix, int rowSize, int columnSize, int startRowIndex, int startColumnIndex);
 };

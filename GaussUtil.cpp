@@ -97,6 +97,38 @@ void GaussUtil::countChooseInRowGauss(CommonUtil* commonUtil, MatchematicalMatri
     }
 }
 
+void GaussUtil::countAnyChooseGauss(CommonUtil* commonUtil, MatchematicalMatrix* matchematicalMatrix, int* orderTable,  double **matrix, int rowSize, int columnSize, int rowIndex, int columnIndex, int stepNumber)
+{
+    pair<int, int> maxValueIndexs = matchematicalMatrix->indexOfMaxValueIn(matrix, rowSize, columnSize, rowIndex, columnIndex);
+
+    if(maxValueIndexs.second != columnIndex)
+    {
+        matchematicalMatrix->exchangeColumn(orderTable, matrix, maxValueIndexs.second, columnIndex, rowSize);
+    }
+
+    if(maxValueIndexs.first != rowIndex) 
+    {
+        matchematicalMatrix->exchangeRow(matrix, maxValueIndexs.first, rowIndex);
+    }
+
+    double* coefficients = countCoefficients(matrix, rowIndex, columnIndex, rowSize); 
+
+    int coeIndex = 0;
+
+    for(int i = rowIndex + 1; i < rowSize; i++)
+    {
+        modifyRow(matrix, coefficients[coeIndex], i, columnIndex + 1, columnSize, stepNumber);
+        coeIndex++;
+    }
+
+    delete[] coefficients;
+
+    if(stepNumber < rowSize - 1) 
+    {
+        countAnyChooseGauss(commonUtil, matchematicalMatrix, orderTable, matrix, rowSize, columnSize, rowIndex + 1, columnIndex + 1, stepNumber + 1);
+    }
+}
+
 double* GaussUtil::countCoefficients(double **matrix, int rowIndex, int columnIndex, int rowSize)
 {
     int coefficientsSize = rowSize - (rowIndex + 1);
