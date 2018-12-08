@@ -117,3 +117,31 @@ void MatchematicalMatrix::exchangeColumn(int* orderTable, double** matrix, int f
 
 	 return make_pair(rowIndexOfMaxValue, coulmnIndexOfMaxvalue);
  }
+
+double** MatchematicalMatrix::constructMatrix(double** matrixA, double* matrixB, int size)
+{
+	double** matrix = new double *[size];
+
+    for(int i = 0; i < size; i++)
+    {
+        matrix[i] = new double[size+1];
+    }
+
+	for(int i = 0; i < size; i++)
+	{
+		for(int j = 0; j < size + 1; j++)
+		{
+			if(j == size)
+			{
+				matrix[i][j] = matrixB[i];
+			}
+			else 
+			{
+				matrix[i][j] = matrixA[i][j];
+			}
+		}
+	}
+	printMatrix(matrix, size, size+1);
+	return matrix;
+}
+

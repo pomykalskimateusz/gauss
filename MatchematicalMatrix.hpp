@@ -22,4 +22,6 @@ class MatchematicalMatrix
     void exchangeColumn(int* orderTable, double** matrix, int firstColumn, int secondColumn, int rowSize);
 
     pair<int, int> indexOfMaxValueIn(double** matrix, int rowSize, int columnSize, int startRowIndex, int startColumnIndex);
+
+    double** constructMatrix(double** matrixA, double* matrixB, int size);
 };

@@ -10,4 +10,6 @@ class CommonUtil
     int indexOfMaxValue(double* table, int tableSize);
 
     void printTable(double* table, int size);
+
+    void printMenu();
 };
