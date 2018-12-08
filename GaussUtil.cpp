@@ -55,8 +55,45 @@ void GaussUtil::countChooseInColumGauss(CommonUtil* commonUtil, MatchematicalMat
 
     if(stepNumber < rowSize - 1) 
     {
-    countChooseInColumGauss(commonUtil, matchematicalMatrix, matrix, rowSize, columnSize, rowIndex + 1, columnIndex + 1, stepNumber + 1);
+        countChooseInColumGauss(commonUtil, matchematicalMatrix, matrix, rowSize, columnSize, rowIndex + 1, columnIndex + 1, stepNumber + 1);
     }
+}
+
+void GaussUtil::countChooseInRowGauss(CommonUtil* commonUtil, MatchematicalMatrix* matchematicalMatrix, int* orderTable, double **matrix, int rowSize, int columnSize, int rowIndex, int columnIndex, int stepNumber)
+{
+    double* singleRow = new double[columnSize - stepNumber];
+    int assistantIndex = stepNumber - 1;
+
+    for(int i = 0; i < columnSize - stepNumber; i ++)
+    {
+        singleRow[i] = matrix[rowIndex][assistantIndex + i];
+    }
+
+    int index = commonUtil->indexOfMaxValue(singleRow, columnSize - stepNumber) + stepNumber - 1;
+
+    delete [] singleRow;
+
+    if(index != columnIndex)
+    {
+        matchematicalMatrix->exchangeColumn(orderTable, matrix, index, columnIndex, rowSize);
+    }
+
+    double* coefficients = countCoefficients(matrix, rowIndex, columnIndex, rowSize); 
+
+    int coeIndex = 0;
+
+    for(int i = rowIndex + 1; i < rowSize; i++)
+    {
+        modifyRow(matrix, coefficients[coeIndex], i, columnIndex + 1, columnSize, stepNumber);
+        coeIndex++;
+    }
+
+    if(stepNumber < rowSize - 1) 
+    {
+        countChooseInRowGauss(commonUtil, matchematicalMatrix, orderTable, matrix, rowSize, columnSize, rowIndex + 1, columnIndex + 1, stepNumber + 1);
+    }
+
+    delete[] coefficients;
 }
 
 double* GaussUtil::countCoefficients(double **matrix, int rowIndex, int columnIndex, int rowSize)

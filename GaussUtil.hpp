@@ -15,6 +15,9 @@ class GaussUtil
 
     void countChooseInColumGauss(CommonUtil* commonUtil, MatchematicalMatrix* matchematicalMatrix, double **matrix, int rowSize, int columnSize, int rowIndex, int columnIndex, int stepNumber);
 
+    void countChooseInRowGauss(CommonUtil* commonUtil, MatchematicalMatrix* matchematicalMatrix, int* orderTable,  double **matrix, int rowSize, int columnSize, int rowIndex, int columnIndex, int stepNumber);
+
+
   private:
     double* countCoefficients(double **matrix, int rowIndex, int columnIndex, int rowSize);
     

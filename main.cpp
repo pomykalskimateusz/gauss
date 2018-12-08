@@ -3,9 +3,24 @@
 
 #include "GaussUtil.hpp"
 #include "ResultUtil.hpp"
-#include "CommonUtil.hpp"
 
 using namespace std;
+
+void orderAsc(MatchematicalMatrix* matchematicalMatrix, int* orderTable, int tableSize, double** matrix, int rowSize)
+{
+    int value = orderTable[0];
+    int valueIndex = 0;
+
+    for(int i = 0; i < tableSize - 1; i++)
+    {
+        if(value > orderTable[i]) 
+        {
+            matchematicalMatrix->exchangeColumn(orderTable, matrix, valueIndex, i, rowSize);
+            value = orderTable[i];
+            valueIndex = i;
+        }
+    }
+}
 
 int main()
 {   
@@ -27,9 +42,18 @@ int main()
     matchematicalMatrix->initializeMatrix(matrix, rowSize, columnSize);
 
     matchematicalMatrix->printMatrix(matrix, rowSize, columnSize);
-   
-    gaussUtil->countChooseInColumGauss(commonUtil, matchematicalMatrix, matrix, rowSize, columnSize, rowIndex, columnIndex, stepNumber);
-   
+    cout << endl; 
+    int* orderTable = new int[columnSize-1];
+
+    for(int i = 0; i < columnSize - 1; i++)
+    {
+        orderTable[i] = i;
+    }
+
+    gaussUtil->countChooseInRowGauss(commonUtil, matchematicalMatrix, orderTable, matrix, rowSize, columnSize, rowIndex, columnIndex, stepNumber);
+    
+    orderAsc(matchematicalMatrix, orderTable, columnSize - 1, matrix, rowSize);
+
     matchematicalMatrix->printMatrix(matrix, rowSize, columnSize);
 
     map<int, double> resultMap = resultUtil->initialResultMap(columnSize);
@@ -38,6 +62,8 @@ int main()
 
     resultUtil->printResultMap(resultMap);
 
+    delete [] orderTable;
+    
     matchematicalMatrix->deleteMatrix(matrix, rowSize);
 
     return 0;
